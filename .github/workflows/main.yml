@@ -7,7 +7,7 @@ jobs:
     runs-on: depot-ubuntu-24.04-32
     strategy:
       matrix:
-        instance: [1, 2, 3]
+        instance: [1]
     
     steps:
     - name: Checkout code

